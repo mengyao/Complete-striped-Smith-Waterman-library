@@ -36,7 +36,7 @@ $(PROG) $(EXAMPLE): $(LOBJS)
 endif
 
 $(EXAMPLE_CPP): example.cpp $(LOBJS) $(LCPPOBJS)
-	$(CXX) $(LDFLAGS) $(CPPFLAGS) $(CXXFLAGS) -o $@ $^ -lm -lz
+	$(CXX) $(LDFLAGS) $(CPPFLAGS) -std=c++11 -pedantic $(CXXFLAGS) -o $@ $^ -lm -lz
 
 $(JAVA_LIB): sswjni.c ssw.c ssw.h
 	$(CC) $(CFLAGS) $(JAVA_INLCUDES) -fPIC -shared -rdynamic -o $@ $< ssw.c 
@@ -57,7 +57,7 @@ ssw.o: ssw.c ssw.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
 ssw_cpp.o: ssw_cpp.cpp ssw_cpp.h ssw.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CPPFLAGS) -std=c++11 -pedantic $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	-rm -f $(LOBJS) $(LCPPOBJS) $(PROG) $(LIB) $(EXAMPLE) $(EXAMPLE_CPP) $(JAVA_LIB) $(JAVA_JAR) $(JAVA_OBJ) *~ 
